@@ -17,6 +17,30 @@
   margin: 0;
   padding: 0;
 }
+/* Webkit browsers (Chrome, Safari, newer versions of Opera) */
+::-webkit-scrollbar {
+    width: 12px; /* Width of the entire scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background: rgb(16, 16, 16); /* Background of the tracking area */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(32, 32, 32); /* Color of the scroll thumb */
+    border-radius: 6px; /* Rounded corners for the thumb */
+    border: 3px solid rgb(16, 16, 16); /* Creates a slight border around the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(48, 48, 48); /* Slightly lighter when hovered */
+}
+
+/* Firefox scrollbar styling */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(32, 32, 32) rgb(16, 16, 16);
+}
 
 body {
   background: radial-gradient(circle at top, #202020 0, #101010 45%, #050505 100%);
