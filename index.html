@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Black Void Linux Documentation</title>
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    /* ===== Header / Top-bar ===== */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: #111;
+      color: #fff;
+      border-bottom: 1px solid #222;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header nav a {
+      color: #fff;
+      margin-left: 15px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    header nav a:hover {
+      text-decoration: underline;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img.logo-image {
+      height: 40px;
+      margin-right: 10px;
+    }
+    .logo-text span {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    .logo-text small {
+      display: block;
+      font-size: 0.7rem;
+      color: #bbb;
+    }
+
+    /* ===== Main / Docs Styling ===== */
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+      color: #ddd;
+      font-family: 'Fira Code', monospace;
+    }
+    section h2, section h3 {
+      color: #eee;
+    }
+    section p {
+      line-height: 1.6;
+      margin-bottom: 1em;
+    }
+
+    /* ===== Hero Section ===== */
+    .hero {
+      text-align: center;
+      padding: 40px 20px 60px;
+      background-color: #1a1a1a;
+      border-radius: 8px;
+      margin-bottom: 40px;
+    }
+    .hero-kicker {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #888;
+      margin-bottom: 10px;
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+      margin-bottom: 15px;
+    }
+    .hero-lead {
+      font-size: 1rem;
+      max-width: 800px;
+      margin: 0 auto;
+      color: #ccc;
+    }
+
+    /* ===== Cards Grid ===== */
+    .grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      margin-bottom: 60px;
+    }
+    .card {
+      background-color: #222;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      transition: transform 0.2s, background 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      background-color: #2a2a2a;
+    }
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+    .card a {
+      color: #4a90e2;
+      text-decoration: none;
+    }
+    .card a:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== Credits Section ===== */
+    .credits {
+      background-color: #111;
+      padding: 30px 20px;
+      border-radius: 8px;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    .credits-inner h2 {
+      margin-bottom: 15px;
+      color: #eee;
+    }
+    .credits-inner p {
+      color: #aaa;
+      line-height: 1.5;
+    }
+    .credits-inner a {
+      color: #4a90e2;
+      text-decoration: none;
+    }
+    .credits-inner a:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid #222;
+      font-size: 0.85rem;
+      color: #777;
+    }
+    .footer-note {
+      display: block;
+      margin-top: 5px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <!-- ===== Header ===== -->
+  <header>
+    <div class="logo">
+      <img src="../../../Branding/Invertigo/bv_invert_white.svg" alt="Black Void Linux logo" class="logo-image" />
+      <div class="logo-text">
+        <span>Black Void Linux</span>
+        <small>Documentation</small>
+      </div>
+    </div>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="install.html">Install</a>
+      <a href="system.html">System</a>
+      <a href="xbps.html">xbps</a>
+    </nav>
+  </header>
+
+  <!-- ===== Main Content ===== -->
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <p class="hero-kicker">Black Void Linux</p>
+      <h1>Documentation</h1>
+      <p class="hero-lead">
+        These pages follow the structure of the Void Linux manuals but use the Black Void styling and wording. Differences in behavior are clearly marked so you can see what changed.
+      </p>
+    </section>
+
+    <!-- Documentation Sections Preview -->
+    <section class="docs-preview" aria-label="Documentation sections">
+      <div class="grid">
+        <article class="card">
+          <h3>Installation</h3>
+          <p>Installation instructions based on the Void Linux manual, adjusted for Black Void images and defaults.</p>
+          <p><a href="install.html">Open installation guide</a></p>
+        </article>
+        <article class="card">
+          <h3>System and Services</h3>
+          <p>Details on runit services, logging, and ongoing system maintenance.</p>
+          <p><a href="system.html">Open system guide</a></p>
+        </article>
+        <article class="card">
+          <h3>Using xbps</h3>
+          <p>Examples for installing, removing, and upgrading packages using xbps.</p>
+          <p><a href="xbps.html">Open xbps guide</a></p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Credits Section -->
+    <section class="credits" aria-label="Credits">
+      <div class="credits-inner">
+        <h2>Credits</h2>
+        <p>
+          Much of the structure and many commands shown here originate from the <a href="https://voidlinux.org" target="_blank" rel="noreferrer">Void Linux</a> documentation.
+        </p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <span>Black Void Linux - Monochrome by design.</span>
+      <span class="footer-note">Independent project built on Void Linux.</span>
+    </footer>
+  </main>
+</body>
+</html>

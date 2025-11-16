@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>XBPS Package Management — Black Void Linux</title>
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    /* ===== Header / Top-bar ===== */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: #111;
+      color: #fff;
+      border-bottom: 1px solid #222;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header nav a {
+      color: #fff;
+      margin-left: 15px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    header nav a:hover {
+      text-decoration: underline;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img.logo-image {
+      height: 40px;
+      margin-right: 10px;
+    }
+    .logo-text span {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    .logo-text small {
+      display: block;
+      font-size: 0.7rem;
+      color: #bbb;
+    }
+
+    /* ===== Main / Docs Styling ===== */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    section h2 {
+      margin-top: 2em;
+      border-bottom: 2px solid #444;
+      padding-bottom: 0.3em;
+      color: #eee;
+    }
+    section p {
+      color: #ddd;
+      line-height: 1.6;
+      margin-bottom: 1em;
+    }
+    .code-block {
+      position: relative;
+      background-color: #2b2b2b;
+      color: #f8f8f2;
+      border-radius: 6px;
+      padding: 20px;
+      margin: 20px 0;
+      overflow-x: auto;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.7);
+    }
+    .code-block pre {
+      margin: 0;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      padding: 5px 12px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      transition: background-color 0.2s;
+    }
+    .copy-btn:hover {
+      background-color: #357ab8;
+    }
+    .note {
+      background: #444;
+      color: #ccc;
+      padding: 10px;
+      border-left: 4px solid #888;
+      margin: 15px 0;
+    }
+    .example {
+      background: #333;
+      padding: 10px;
+      border-radius: 4px;
+      color: #f1f1f1;
+      font-family: monospace;
+    }
+    .section-subtitle {
+      color: #bbb;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- ===== Top-bar / Header ===== -->
+  <header>
+    <div class="logo">
+      <img src="../../../Branding/Invertigo/bv_invert_white.svg" alt="Black Void Linux logo" class="logo-image" />
+      <div class="logo-text">
+        <span>Black Void Linux</span>
+        <small>XBPS Package Management</small>
+      </div>
+    </div>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="index.html">Docs</a>
+      <a href="system.html">System</a>
+    </nav>
+  </header>
+
+  <!-- ===== Main Documentation Content ===== -->
+<main>
+  <h1>XBPS Package Management — Complete Guide</h1>
+  <p>Everything you need to know to use XBPS (X Binary Package System) on Black Void Linux: from beginner basics to advanced tricks.</p>
+
+  <section>
+    <h2>What is XBPS?</h2>
+    <p>
+      XBPS (X Binary Package System) is the native package manager for Void Linux. It was built from the ground up by the Void Linux team for performance, flexibility, and simplicity.  
+    </p>
+    <p>Key features include:</p>
+    <ul>
+      <li>Multiple repository support (HTTP, HTTPS, FTP).</li>
+      <li>Strong integrity: SHA256 checks, signed repositories.</li>
+      <li>Modern compression formats (zstd, xz, lz4).</li>
+      <li>Ability to force re-install, downgrade, or hold packages.</li>
+      <li>Scriptable package actions (pre/post install, remove, etc.).</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>XBPS for Beginners</h2>
+
+    <h3 class="section-subtitle">Basic concepts: repositories, cache, and package expressions</h3>
+    <ul>
+      <li><strong>Repositories</strong> are where XBPS finds packages. Your system has configuration files (e.g., in <code>/etc/xbps.d/</code>) that specify which repositories you use.</li>
+      <li><strong>Cache</strong>: when you install packages, XBPS stores the downloaded <code>.xbps</code> files in a cache (by default <code>/var/cache/xbps</code>). You can clean this later.</li>
+      <li><strong>Package expression</strong>: the way you specify which package you want. It can be just a name (e.g., <code>vlc</code>), or include a version (e.g., <code>foo-1.0_1</code>), or use comparators (e.g., <code>foo>=2.0</code>).</li>
+    </ul>
+
+    <h3 class="section-subtitle">Installing your first package</h3>
+    <p>Step-by-step example:</p>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      <pre><code># Sync the package repository indexes
+sudo xbps-install -S
+
+# Install VLC
+sudo xbps-install -S vlc</code></pre>
+    </div>
+    <p>Explanation: the <code>-S</code> flag syncs your local repository indexes with remote servers.</p>
+
+    <h3 class="section-subtitle">Searching for packages</h3>
+    <p>To find packages by name or description:</p>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      <pre><code>xbps-query -Rs <search_term></code></pre>
+    </div>
+    <p>Example:</p>
+    <div class="example">xbps-query -Rs firefox</div>
+
+    <h3 class="section-subtitle">Listing installed packages</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      <pre><code>xbps-query -l</code></pre>
+    </div>
+
+    <h3 class="section-subtitle">Removing packages</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      <pre><code>sudo xbps-remove <package_name></code></pre>
+    </div>
+    <p>Remove orphaned dependencies:</p>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      <pre><code>sudo xbps-remove -o</code></pre>
+    </div>
+    <p>Clean package cache:</p>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      <pre><code>sudo xbps-remove -O</code></pre>
+    </div>
+
+    <h3 class="section-subtitle">Updating your system</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      <pre><code># Sync repos and upgrade all packages
+sudo xbps-install -Su</code></pre>
+    </div>
+    <p>Dry-run (simulate updates without applying):</p>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      <pre><code>sudo xbps-install -n -u</code></pre>
+    </div>
+
+  </section>
+
+  <section>
+    <h2>Intermediate & Advanced Usage</h2>
+
+    <h3 class="section-subtitle">Reconfiguring packages</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      <pre><code># Reconfigure a package
+sudo xbps-reconfigure <package_name>
+
+# Force reconfigure
+sudo xbps-reconfigure -f <package_name>
+
+# Reconfigure all packages
+sudo xbps-reconfigure -a</code></pre>
+    </div>
+
+    <h3 class="section-subtitle">Fixing the package database</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      <pre><code># Check all package database entries
+sudo xbps-pkgdb -a
+
+# Hold a package from updating
+sudo xbps-pkgdb -m hold <package_name>
+
+# Remove hold
+sudo xbps-pkgdb -m unhold <package_name></code></pre>
+    </div>
+
+    <h3 class="section-subtitle">Downgrading packages</h3>
+    <p>Force installation of a specific version:</p>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      <pre><code># Force reinstall a specific version
+sudo xbps-install -f <package_name>-<version></code></pre>
+    </div>
+
+    <h3 class="section-subtitle">Repository locking</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      <pre><code># Lock package to its repository
+sudo xbps-pkgdb -m repolock <package_name>
+
+# Unlock
+sudo xbps-pkgdb -m repounlock <package_name></code></pre>
+    </div>
+
+    <h3 class="section-subtitle">Ignoring packages</h3>
+    <p>Prevent a package from ever being installed or updated:</p>
+    <div class="example">ignorepkg=sudo</div>
+
+    <h3 class="section-subtitle">Virtual packages</h3>
+    <p>Virtual packages map a name to a real package:</p>
+    <div class="example">virtualpkg=linux:linux5.6</div>
+  </section>
+
+  <section>
+    <h2>Building and Installing from Source (xbps-src)</h2>
+
+    <ol>
+      <li>Clone the repository:
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <pre><code>git clone https://github.com/void-linux/void-packages.git
+cd void-packages</code></pre>
+        </div>
+      </li>
+      <li>Bootstrap the build environment:
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <pre><code>./xbps-src binary-bootstrap</code></pre>
+        </div>
+      </li>
+      <li>Build a package:
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <pre><code>./xbps-src pkg mypkg</code></pre>
+        </div>
+      </li>
+      <li>Install the built package:
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <pre><code>sudo xbps-install --repository hostdir/binpkgs mypkg</code></pre>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Troubleshooting & Tips</h2>
+
+    <div class="note">
+      Always run <code>xbps-install -S</code> before installing/updating to ensure your repository metadata is up-to-date.
+    </div>
+
+    <h3>Half-removed packages</h3>
+    <p>If removal fails, the package may remain half-removed. Retry with:</p>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      <pre><code>sudo xbps-remove <package_name></code></pre>
+    </div>
+
+    <h3>Repository desync or outdated indexes</h3>
+    <p>Update the XBPS binary first if repositories appear outdated:</p>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      <pre><code>sudo xbps-install -Su xbps</code></pre>
+    </div>
+
+    <h3>Permissions</h3>
+    <p>Most installation/removal commands require <code>sudo</code>. Queries like <code>xbps-query</code> can run as a normal user.</p>
+  </section>
+
+  <section>
+    <h2>Additional Resources</h2>
+    <ul>
+      <li><a href="https://docs.voidlinux.org/xbps/index.html" target="_blank">Void Linux XBPS Handbook</a></li>
+      <li><a href="https://docs.voidlinux.org/xbps/advanced-usage.html" target="_blank">Advanced XBPS Usage Guide</a></li>
+      <li><a href="https://xbps-src-tutorials.github.io/" target="_blank">xbps-src Packaging Tutorials</a></li>
+      <li><a href="https://github.com/void-linux/void-packages" target="_blank">Void Packages Repository</a></li>
+    </ul>
+  </section>
+</main>
+
+
+
+  <script>
+    function copyCode(btn) {
+      const code = btn.nextElementSibling.querySelector('code');
+      if (!code) return;
+      const text = code.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 1000);
+      }, () => { btn.textContent = 'Error'; });
+    }
+  </script>
+</body>
+</html>

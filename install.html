@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Install Black Void Linux</title>
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    /* ===== Header / Top-bar ===== */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: #111;
+      color: #fff;
+      border-bottom: 1px solid #222;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header nav a {
+      color: #fff;
+      margin-left: 15px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    header nav a:hover {
+      text-decoration: underline;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img.logo-image {
+      height: 40px;
+      margin-right: 10px;
+    }
+    .logo-text span {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    .logo-text small {
+      display: block;
+      font-size: 0.7rem;
+      color: #bbb;
+    }
+
+    /* ===== Main Content ===== */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      color: #ddd;
+      font-family: 'Fira Code', monospace;
+    }
+    section h2, section h3 {
+      color: #eee;
+    }
+    section p {
+      line-height: 1.6;
+      margin-bottom: 1em;
+    }
+
+    /* ===== Hero Section ===== */
+    .hero {
+      text-align: center;
+      padding: 40px 20px 60px;
+      background-color: #1a1a1a;
+      border-radius: 8px;
+      margin-bottom: 40px;
+    }
+    .hero-kicker {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #888;
+      margin-bottom: 10px;
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+      margin-bottom: 15px;
+    }
+    .hero-lead {
+      font-size: 1rem;
+      max-width: 800px;
+      margin: 0 auto;
+      color: #ccc;
+    }
+
+    /* ===== Cards Grid ===== */
+    .grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      margin-bottom: 60px;
+    }
+    .card {
+      background-color: #222;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      transition: transform 0.2s, background 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      background-color: #2a2a2a;
+    }
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+    .card a {
+      color: #4a90e2;
+      text-decoration: none;
+    }
+    .card a:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid #222;
+      font-size: 0.85rem;
+      color: #777;
+    }
+    .footer-note {
+      display: block;
+      margin-top: 5px;
+      color: #555;
+    }
+
+    /* ===== Tips & Notes ===== */
+    .note {
+      background: #333;
+      padding: 10px 15px;
+      border-left: 4px solid #888;
+      margin: 15px 0;
+      color: #ccc;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <!-- ===== Header ===== -->
+  <header>
+    <div class="logo">
+      <img src="../../../Branding/Invertigo/bv_invert_white.svg" alt="Black Void Linux logo" class="logo-image" />
+      <div class="logo-text">
+        <span>Black Void Linux</span>
+        <small>Install Guide</small>
+      </div>
+    </div>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="index.html">Docs index</a>
+      <a href="system.html">System</a>
+      <a href="xbps.html">xbps</a>
+    </nav>
+  </header>
+
+  <!-- ===== Main Content ===== -->
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <p class="hero-kicker">Install</p>
+      <h1>Installing Black Void Linux</h1>
+      <p class="hero-lead">
+        This guide follows the Void Linux installation manual but is rewritten for Black Void images and defaults. Everything is explained so beginners can follow along easily, even if you’ve never installed Linux before.
+      </p>
+    </section>
+
+    <!-- Install Steps -->
+    <section class="docs-preview" aria-label="Install steps">
+      <div class="grid">
+        <article class="card">
+          <h3>1. Download and Prepare Install Media</h3>
+          <p>
+            Go to the <a href="../index.html#download">download section</a> and get the latest Black Void ISO image. Write it to a USB stick using a tool you are comfortable with:
+          </p>
+          <ul>
+            <li><strong>Windows:</strong> Use <a href="https://rufus.ie/" target="_blank">Rufus</a> or <a href="https://balena.io/etcher/" target="_blank">Balena Etcher</a>.</li>
+            <li><strong>macOS:</strong> Use <a href="https://balena.io/etcher/" target="_blank">Balena Etcher</a> or <code>dd</code> from the terminal.</li>
+            <li><strong>Linux:</strong> Use <code>dd</code>, <a href="https://balena.io/etcher/" target="_blank">Etcher</a>, or <code>gnome-disks</code>.</li>
+          </ul>
+          <div class="note">Tip: Verify the SHA256 checksum to ensure the image isn’t corrupted.</div>
+        </article>
+
+        <article class="card">
+          <h3>2. Boot from USB & Partition</h3>
+          <p>
+            Insert the USB and boot your computer. Select the correct boot option (UEFI or BIOS). Once in the live environment:
+          </p>
+          <ul>
+            <li>Use <strong>GParted</strong> or the installer’s partition tool to create partitions: <code>/</code> (root), optionally <code>/home</code>, and <code>swap</code> (if needed).</li>
+            <li>Tip: For beginners, choose <strong>Ext4</strong> filesystem for simplicity.</li>
+            <li>Remember your partitioning scheme—it will be needed in the next steps.</li>
+          </ul>
+          <div class="note">UEFI systems should have a small EFI partition (~512MB, FAT32) with the "boot" flag.</div>
+        </article>
+
+        <article class="card">
+          <h3>3. Run the Installer</h3>
+          <p>
+            Black Void uses the Void-style installer. Steps include:
+          </p>
+          <ul>
+            <li>Select your target disk and partitions.</li>
+            <li>Set the root password and optionally create a user account.</li>
+            <li>Choose system configuration options (keyboard layout, hostname, network).</li>
+            <li>Install the base system and optional packages (desktop, server, minimal).</li>
+          </ul>
+          <div class="note">The installer shows hints for each step—read them carefully. If unsure, stick with defaults.</div>
+        </article>
+
+        <article class="card">
+          <h3>4. Post-Install Setup</h3>
+          <p>
+            After the first boot:
+          </p>
+          <ul>
+            <li>Log in with your user account or root.</li>
+            <li>Update your system with <code>sudo xbps-install -Su</code>.</li>
+            <li>Install additional software as needed using XBPS or GUI package managers.</li>
+            <li>Configure your desktop environment, network, and any peripherals.</li>
+          </ul>
+          <div class="note">Tip: Keep a live USB handy for recovery or reinstall if needed.</div>
+        </article>
+
+        <article class="card">
+          <h3>5. Optional Tools & Tips</h3>
+          <ul>
+            <li>Use <strong>Balena Etcher</strong> or <strong>Rufus</strong> for reliable USB writing.</li>
+            <li>Always verify ISO checksums to prevent corrupted installs.</li>
+            <li>If new to Linux, consider installing a GUI environment for easier usage.</li>
+            <li>Check the <a href="system.html">System documentation</a> after installation to configure runit services, networking, and users.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <span>Black Void Linux - Monochrome by design.</span>
+      <span class="footer-note">Based on the work of the Void Linux project.</span>
+    </footer>
+  </main>
+</body>
+</html>

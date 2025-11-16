@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>System and Services – Black Void Linux</title>
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: #111;
+      color: #fff;
+      border-bottom: 1px solid #222;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header nav a {
+      color: #fff;
+      margin-left: 15px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    header nav a:hover {
+      text-decoration: underline;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img.logo-image {
+      height: 40px;
+      margin-right: 10px;
+    }
+    .logo-text span {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    .logo-text small {
+      display: block;
+      font-size: 0.7rem;
+      color: #bbb;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+      color: #ddd;
+      font-family: 'Fira Code', monospace;
+    }
+    .hero {
+      text-align: center;
+      padding: 40px 20px 60px;
+      background-color: #1a1a1a;
+      border-radius: 8px;
+      margin-bottom: 40px;
+    }
+    .hero-kicker {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #888;
+      margin-bottom: 10px;
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+      margin-bottom: 15px;
+    }
+    .hero-lead {
+      font-size: 1rem;
+      max-width: 800px;
+      margin: 0 auto;
+      color: #ccc;
+    }
+
+    .grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      margin-bottom: 60px;
+    }
+    .card {
+      background-color: #222;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      transition: transform 0.2s, background 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      background-color: #2a2a2a;
+    }
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      color: #eee;
+    }
+    .card a {
+      color: #4a90e2;
+      text-decoration: none;
+    }
+    .card a:hover {
+      text-decoration: underline;
+    }
+
+    h2 {
+      margin-top: 2em;
+      border-bottom: 2px solid #444;
+      padding-bottom: 0.3em;
+      color: #eee;
+    }
+    p, li {
+      line-height: 1.6;
+      margin-bottom: .8em;
+    }
+    code, pre {
+      background: #2b2b2b;
+      color: #f8f8f2;
+      padding: 8px;
+      border-radius: 4px;
+      font-family: 'Fira Code', monospace;
+    }
+    ul {
+      margin-left: 20px;
+    }
+    .note {
+      background: #333;
+      padding: 10px 15px;
+      border-left: 4px solid #888;
+      margin: 15px 0;
+      color: #ccc;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="../../../Branding/Invertigo/bv_invert_white.svg" alt="Black Void Linux logo" class="logo-image" />
+      <div class="logo-text">
+        <span>Black Void Linux</span>
+        <small>System & Services</small>
+      </div>
+    </div>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="index.html">Docs index</a>
+      <a href="install.html">Install</a>
+      <a href="xbps.html">xbps</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="hero-kicker">System</p>
+      <h1>System and Services</h1>
+      <p class="hero-lead">
+        This page mirrors the Void Linux runit & system documentation, styled for Black Void. It covers service layout, logging, maintenance, runlevels, per-user services, and more.
+      </p>
+    </section>
+
+    <!-- Overview Cards -->
+    <section aria-label="System topics">
+      <div class="grid">
+        <article class="card">
+          <h3>Service Layout & runit</h3>
+          <p>How runit works, directory structure, service supervision, enabling/disabling services.</p>
+        </article>
+        <article class="card">
+          <h3>Logging</h3>
+          <p>Detailed runit logging — svlogd, vlogger, log directory conventions, log rotation.</p>
+        </article>
+        <article class="card">
+          <h3>Per‑User Services</h3>
+          <p>How to set up services under your own user via runsvdir, chpst, SVDIR, etc.</p>
+        </article>
+        <article class="card">
+          <h3>Boot & Shutdown (runit stages)</h3>
+          <p>What happens in runit’s stage 1, stage 2, and stage 3. How shutdown and reboot work.</p>
+        </article>
+        <article class="card">
+          <h3>Maintenance</h3>
+          <p>System maintenance tasks: service supervision, cleaning logs, checking runlevels, switching runsvdir.</p>
+        </article>
+        <article class="card">
+          <h3>Advanced Topics</h3>
+          <p>Switching service directories, runit alternatives, user service hacking.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Detailed Documentation -->
+    <section>
+      <h2>1. Runit Architecture & Service Layout</h2>
+      <p>
+        Black Void (like Void) uses <strong>runit</strong> as its init and supervision system. Services are managed by runit’s three-stage lifecycle: boot (stage 1), service supervision (stage 2), and shutdown (stage 3). :contentReference[oaicite:0]{index=0}
+      </p>
+      <p>
+        The service directories live in <code>/etc/sv/</code>. Each service directory must contain at least a <code>run</code> script, which is executed in the foreground by runit. Optionally, it can contain:
+      </p>
+      <ul>
+        <li><code>check</code>: an executable to verify service health.</li>
+        <li><code>finish</code>: runs on service stop.</li>
+        <li><code>conf</code>: environment variables to source in the run script. :contentReference[oaicite:1]{index=1}</li>
+        <li><code>log/</code>: a directory for a log sub‑service (managed by <code>svlogd</code> or a wrapper). :contentReference[oaicite:2]{index=2}</li>
+      </ul>
+
+      <p>
+        Once a service is defined in <code>/etc/sv/<service></code>, you enable it by creating a symlink into the active runlevel directory, typically <code>/var/service</code> which points to the current runsvdir. :contentReference[oaicite:3]{index=3}
+      </p>
+      <pre><code># Enable a service (example: sshd)
+sudo ln -s /etc/sv/sshd /var/service/</code></pre>
+      <p>
+        To disable a service, remove the symlink:
+      </p>
+      <pre><code># Disable a service
+sudo rm /var/service/sshd</code></pre>
+
+      <h3>Managing Services</h3>
+      <p>
+        Use the `sv` tool to control services:
+      </p>
+      <ul>
+        <li><code>sv up &lt;service&gt;</code> — start a service.</li>
+        <li><code>sv down &lt;service&gt;</code> — stop it.</li>
+        <li><code>sv restart &lt;service&gt;</code> — restart.</li>
+        <li><code>sv status &lt;service&gt;</code> — check its status. :contentReference[oaicite:4]{index=4}</li>
+      </ul>
+      <p>
+        You can also check **all** services:
+      </p>
+      <pre><code>sv status /var/service/*</code></pre>
+
+      <h3>Runit's runsvdir and runlevels</h3>
+      <p>
+        Runit supervises services using a “runsvdir” — a directory containing symlinks to enabled service definitions. On Void-like systems, there are often multiple runsvdirs under <code>/etc/runit/runsvdir/</code>, such as `default` (normal boot) and `single` (rescue mode). :contentReference[oaicite:5]{index=5}  
+      </p>
+      <p>
+        At runtime, <code>/var/service</code> is a symlink to the currently active runsvdir. :contentReference[oaicite:6]{index=6}  
+      </p>
+      <p>
+        To switch to another runsvdir (e.g. single-user / rescue mode), you can use:
+      </p>
+      <pre><code>runsvchdir single</code></pre>
+      <p>
+        This switches which directory is treated as the “current” runlevel. :contentReference[oaicite:7]{index=7}  
+      </p>
+
+    </section>
+
+    <section>
+      <h2>2. Logging with runit</h2>
+      <p>
+        Logging in runit is typically handled by <code>svlogd</code>, a small log daemon that reads from services’ <code>log/run</code> scripts and writes to rotating logs. :contentReference[oaicite:8]{index=8}  
+      </p>
+      <p>
+        Example <code>svlogd</code> invocation is:
+      </p>
+      <pre><code>svlogd [options] &lt;log‑directory&gt;</code></pre>
+      <p>
+        Key options:
+      </p>
+      <ul>
+        <li><code>-tttv</code>: timestamp, verbose, etc.</li>
+        <li><code>-r c</code>: set rotation count.</li>
+        <li><code>-l len</code>: max size of a log file.</li>
+      </ul>
+
+      <h3>Using vlogger / svlogger</h3>
+      <p>
+        Many Void users use a wrapper script `vlogger` (or similarly `svlogger`) to integrate with <code>svlogd</code>. For example, a service’s `<service>/log/run` script may exec into vlogger, which chooses a log directory and runs `svlogd` appropriately. :contentReference[oaicite:9]{index=9}  
+      </p>
+      <p>
+        A common pattern to log both stdout and stderr is to redirect stderr to stdout in the service’s `run` script:
+      </p>
+      <pre><code>#!/bin/sh
+exec 2>&1
+exec /path/to/service —args …</code></pre>
+      <p>Many users report this setup works well. :contentReference[oaicite:10]{index=10}</p>
+
+      <h3>Log Rotation & Management</h3>
+      <p>
+        `svlogd` automatically rotates logs based on configuration. When you send a HUP signal to `svlogd`, it reopens and rotates logs. :contentReference[oaicite:11]{index=11}  
+      </p>
+      <p>
+        Keep logs under control: monitor log sizes, and clean up old logs if needed, because a misconfigured or noisy service can create large logs quickly.
+      </p>
+    </section>
+
+    <section>
+      <h2>3. Per‑User Services</h2>
+      <p>
+        Void allows *per-user runit services*. This means users (non-root) can run their own services with runsvdir, managed under their home directory. :contentReference[oaicite:12]{index=12}  
+      </p>
+      <p>How to set this up:</p>
+      <ul>
+        <li>Create a service definition directory in `/etc/sv/`, e.g. `/etc/sv/runsvdir-username`.</li>
+        <li>In its `run` script, use `chpst` to drop to your user and launch runsvdir in your home dir:</li>
+      </ul>
+      <pre><code>#!/bin/sh
+export USER="youruser"
+export HOME="/home/youruser"
+groups="$(id -Gn "$USER" | tr ' ' ':')"
+exec chpst -u "$USER:$groups" runsvdir "$HOME/service"</code></pre>
+      <p>
+        Once it’s enabled, runit will supervise a `runsvdir` inside your home. Your services go under `~/service/`. :contentReference[oaicite:13]{index=13}  
+      </p>
+      <p>
+        Use `SVDIR=~/service` environment variable so `sv` commands refer to your user-level service directory. :contentReference[oaicite:14]{index=14}  
+      </p>
+    </section>
+
+    <section>
+      <h2>4. Boot Stages & Shutdown Behavior</h2>
+      <p>
+        Runit’s boot sequence is split into three stages. :contentReference[oaicite:15]{index=15}  
+      </p>
+      <ul>
+        <li><strong>Stage 1:</strong> initialization tasks. Runit runs `/etc/runit/1`. If it fails, stage 3 is invoked directly.</li>
+        <li><strong>Stage 2:</strong> service supervision. Runit runs `/etc/runit/2`, which should start a `runsvdir` process supervising services.</li>
+        <li><strong>Stage 3:</strong> shutdown. It runs `/etc/runit/3`, handling clean shutdown or reboot. :contentReference[oaicite:16]{index=16}</li>
+      </ul>
+      <p>
+        For reboot: if `/etc/runit/reboot` exists and is executable, stage 3 triggers a reboot instead of a halt. :contentReference[oaicite:17]{index=17}  
+      </p>
+      <p>
+        To change which runlevel is used, or to switch services directory at runtime, use `runsvchdir`:
+      </p>
+      <pre><code>runsvchdir &lt;runsvdir-name&gt;</code></pre>
+      <p>
+        Example: to switch to a rescue / single-user runlevel:
+      </p>
+      <pre><code>runsvchdir single</code></pre>
+      <p>
+        That changes the active service directory (`/var/service` symlink) to the chosen runsvdir. :contentReference[oaicite:18]{index=18}  
+      </p>
+    </section>
+
+    <section>
+      <h2>5. Maintenance & System Health</h2>
+      <p>
+        Regular tasks for a Void / Black Void system include:
+      </p>
+      <ul>
+        <li>Check which services are enabled: `ls /var/service/`.</li>
+        <li>Review running services: `sv status /var/service/*`.</li>
+        <li>Clean or rotate logs if they grow: using log tools or managing `svlogd` configs.</li>
+        <li>Switch runlevels if needed (e.g., for rescue / single-user mode) with `runsvchdir`.</li>
+        <li>Update system services or reconfigure them by editing `conf` inside `/etc/sv/<service>/conf` (if supported), then restart with `sv restart <service>`.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>6. Advanced Topics & Alternatives</h2>
+      <h3>Using a GUI: Runkit</h3>
+      <p>
+        For users who prefer a GUI way to manage runit services, there is **Runkit**, a GTK/libadwaita tool that wraps `sv` commands. :contentReference[oaicite:19]{index=19}  
+      </p>
+      <ul>
+        <li>Runkit uses `runkitd` to safely perform privileged `sv` operations via `pkexec`.</li>
+        <li>Service discovery, status display, start/stop/restart are all handled via GUI.</li>
+      </ul>
+
+      <h3>Alternative Supervisors</h3>
+      <p>
+        While Void defaults to runit, there are other supervision systems. One community discussion mentions **fiss** as a possible replacement, offering service ordering and richer features. :contentReference[oaicite:20]{index=20}  
+      </p>
+      <p>
+        However, if you rely on runit-specific service scripts (`/etc/sv/...`), switching may require rewriting service definitions.
+      </p>
+
+      <h3>Service Dependencies</h3>
+      <p>
+        Runit does *not* enforce service dependency ordering like systemd. If a service depends on another, you often need to handle this manually in the `run` script:
+      </p>
+      <pre><code># Example snippet in /etc/sv/your-service/run
+sv check other-service || exit 1
+exec your-daemon</code></pre>
+      <p>
+        This makes `your-service` wait until `other-service` is “up” before starting. :contentReference[oaicite:21]{index=21}  
+      </p>
+    </section>
+
+    <section>
+      <h2>7. Common Pitfalls & Troubleshooting</h2>
+      <div class="note">
+        <strong>Service not starting?</strong>  
+        Make sure you created the symlink in `/var/service` to your service directory in `/etc/sv/`. Without that, runit won’t supervise it. :contentReference[oaicite:22]{index=22}  
+      </div>
+      <div class="note">
+        <strong>Logs not appearing?</strong>  
+        Ensure your service has a `log` directory and a `run` script inside it that either calls `svlogd` or `vlogger`. If stderr is empty, consider redirecting `2>&1` in your service’s `run` script. :contentReference[oaicite:23]{index=23}  
+      </div>
+      <div class="note">
+        <strong>Switching runlevels doesn’t take effect?</strong>  
+        Use `runsvchdir <dir>` to switch, and verify `/var/service` points to the new directory. :contentReference[oaicite:24]{index=24}  
+      </div>
+
+      <h3>Reboot / Shutdown Hangs</h3>
+      <p>
+        Some users report “runit: system reboot.” hanging at shutdown or reboot. :contentReference[oaicite:25]{index=25}  
+      </p>
+      <p>
+        Possible workarounds:
+      </p>
+      <ul>
+        <li>Make sure your runsvdir configuration is correct, and no critical services are preventing shutdown.</li>
+        <li>Check for a `/etc/runit/reboot` script or execute permissions for it if reboot is expected. :contentReference[oaicite:26]{index=26}</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>8. Further Reading & Resources</h2>
+      <ul>
+        <li><a href="https://docs.voidlinux.org/config/services/index.html" target="_blank">Void Handbook: Services & Daemons (runit)</a></li>
+        <li><a href="https://docs.voidlinux.org/config/services/user-services.html" target="_blank">Void Handbook: Per‑User Services</a></li>
+        <li><a href="https://man.voidlinux.org/runit" target="_blank">runit(8) — Void Linux Manual</a></li>
+        <li><a href="https://man.voidlinux.org/runsvchdir.8" target="_blank">runsvchdir(8) — Change runlevel directory</a></li>
+        <li><a href="https://man.voidlinux.org/svlogd.8" target="_blank">svlogd(8) — runit logging daemon</a></li>
+      </ul>
+    </section>
+
+    <footer>
+      <span>Black Void Linux – Monochrome by design.</span>
+      <span class="footer-note">Based partially on Void Linux system & runit documentation.</span>
+    </footer>
+  </main>
+</body>
+</html>
