@@ -1,226 +1,278 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Black Void Linux Documentation</title>
-  <link rel="stylesheet" href="../style.css" />
-  <style>
-    /* ===== Header / Top-bar ===== */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 20px;
-      background-color: #111;
-      color: #fff;
-      border-bottom: 1px solid #222;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    header nav a {
-      color: #fff;
-      margin-left: 15px;
-      text-decoration: none;
-      font-weight: 500;
-    }
-    header nav a:hover {
-      text-decoration: underline;
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-    }
-    .logo img.logo-image {
-      height: 40px;
-      margin-right: 10px;
-    }
-    .logo-text span {
-      font-size: 1.2rem;
-      font-weight: bold;
-    }
-    .logo-text small {
-      display: block;
-      font-size: 0.7rem;
-      color: #bbb;
-    }
-
-    /* ===== Main / Docs Styling ===== */
-    main {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 20px;
-      color: #ddd;
-      font-family: 'Fira Code', monospace;
-    }
-    section h2, section h3 {
-      color: #eee;
-    }
-    section p {
-      line-height: 1.6;
-      margin-bottom: 1em;
-    }
-
-    /* ===== Hero Section ===== */
-    .hero {
-      text-align: center;
-      padding: 40px 20px 60px;
-      background-color: #1a1a1a;
-      border-radius: 8px;
-      margin-bottom: 40px;
-    }
-    .hero-kicker {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: #888;
-      margin-bottom: 10px;
-    }
-    .hero h1 {
-      font-size: 2.2rem;
-      margin-bottom: 15px;
-    }
-    .hero-lead {
-      font-size: 1rem;
-      max-width: 800px;
-      margin: 0 auto;
-      color: #ccc;
-    }
-
-    /* ===== Cards Grid ===== */
-    .grid {
-      display: grid;
-      gap: 20px;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      margin-bottom: 60px;
-    }
-    .card {
-      background-color: #222;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.4);
-      transition: transform 0.2s, background 0.2s;
-    }
-    .card:hover {
-      transform: translateY(-5px);
-      background-color: #2a2a2a;
-    }
-    .card h3 {
-      margin-top: 0;
-      margin-bottom: 10px;
-    }
-    .card a {
-      color: #4a90e2;
-      text-decoration: none;
-    }
-    .card a:hover {
-      text-decoration: underline;
-    }
-
-    /* ===== Credits Section ===== */
-    .credits {
-      background-color: #111;
-      padding: 30px 20px;
-      border-radius: 8px;
-      margin-bottom: 40px;
-      text-align: center;
-    }
-    .credits-inner h2 {
-      margin-bottom: 15px;
-      color: #eee;
-    }
-    .credits-inner p {
-      color: #aaa;
-      line-height: 1.5;
-    }
-    .credits-inner a {
-      color: #4a90e2;
-      text-decoration: none;
-    }
-    .credits-inner a:hover {
-      text-decoration: underline;
-    }
-
-    /* ===== Footer ===== */
-    footer {
-      text-align: center;
-      padding: 20px;
-      border-top: 1px solid #222;
-      font-size: 0.85rem;
-      color: #777;
-    }
-    .footer-note {
-      display: block;
-      margin-top: 5px;
-      color: #555;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>Black Void Linux</title>
 </head>
 <body>
-  <!-- ===== Header ===== -->
   <header>
     <div class="logo">
-      <img src="../../../Branding/Invertigo/bv_invert_white.svg" alt="Black Void Linux logo" class="logo-image" />
+      <img src="../../Branding/Invertigo/bv_invert_white.svg" alt="Black Void Linux logo" class="logo-image" />
       <div class="logo-text">
         <span>Black Void Linux</span>
-        <small>Documentation</small>
+        <small>Independent project built on Void Linux</small>
       </div>
     </div>
     <nav>
-      <a href="../index.html">Home</a>
-      <a href="install.html">Install</a>
-      <a href="system.html">System</a>
-      <a href="xbps.html">xbps</a>
+      <a href="#about">About</a>
+      <a href="#features">Features</a>
+      <a href="#editions">Editions</a>
+      <a href="#download">Download</a>
+      <a href="docs/">Docs</a>
+      <a href="https://github.com/noor633" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="https://discord.gg/nAvcS7HuxM" target="_blank" rel="noreferrer">Discord</a>
     </nav>
   </header>
 
-  <!-- ===== Main Content ===== -->
   <main>
-    <!-- Hero Section -->
-    <section class="hero">
-      <p class="hero-kicker">Black Void Linux</p>
-      <h1>Documentation</h1>
+    <section class="hero" id="about">
+      <p class="hero-kicker">Monochrome. Quiet. Focused.</p>
+      <h1>Black Void Linux</h1>
       <p class="hero-lead">
-        These pages follow the structure of the Void Linux manuals but use the Black Void styling and wording. Differences in behavior are clearly marked so you can see what changed.
+        A modern fork of Void Linux that keeps the same simple tooling and rolling base while focusing on a dark, minimal and distraction free environment.
       </p>
+      <div class="hero-actions">
+        <a href="#download" class="btn btn-primary">Download images</a>
+        <a href="docs/" class="btn btn-ghost">Open documentation</a>
+      </div>
     </section>
 
-    <!-- Documentation Sections Preview -->
-    <section class="docs-preview" aria-label="Documentation sections">
+    <section aria-labelledby="about-project-title" class="about-project">
+      <h2 id="about-project-title" class="section-title">What Black Void Linux is</h2>
       <div class="grid">
         <article class="card">
-          <h3>Installation</h3>
-          <p>Installation instructions based on the Void Linux manual, adjusted for Black Void images and defaults.</p>
-          <p><a href="install.html">Open installation guide</a></p>
+          <h3>Built on Void Linux</h3>
+          <p>
+            Black Void Linux starts from the Void Linux base system and package ecosystem. It keeps the same core tools like runit and xbps and follows the rolling release model.
+          </p>
         </article>
         <article class="card">
-          <h3>System and Services</h3>
-          <p>Details on runit services, logging, and ongoing system maintenance.</p>
-          <p><a href="system.html">Open system guide</a></p>
+          <h3>Opinionated styling and defaults</h3>
+          <p>
+            The focus is on a very dark palette near 16,16,16, minimal background services and a layout that keeps the desktop quiet so your work stands out.
+          </p>
         </article>
         <article class="card">
-          <h3>Using xbps</h3>
-          <p>Examples for installing, removing, and upgrading packages using xbps.</p>
-          <p><a href="xbps.html">Open xbps guide</a></p>
+          <h3>No project level telemetry added</h3>
+          <p>
+            Black Void Linux images do not add extra analytics or tracking services. What runs on your system is visible and under your control.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Separate and unofficial</h3>
+          <p>
+            This is an independent project built on the work of the Void Linux community. It is not an official Void Linux flavor and is not endorsed by the Void project.
+          </p>
         </article>
       </div>
     </section>
 
-    <!-- Credits Section -->
+    <section aria-labelledby="under-the-hood-title" class="under-hood">
+      <h2 id="under-the-hood-title" class="section-title">Under the hood</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Init system</h3>
+          <p>
+            Uses <code>runit</code> with simple service directories and predictable boot behavior. Services are regular scripts that are easy to inspect and control.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Package manager</h3>
+          <p>
+            Uses <code>xbps</code> with the Void package tree. For example: <code>xbps-install -S pkgname</code>, <code>xbps-query -Rs pattern</code> and <code>xbps-install -Su</code> for full upgrades.
+          </p>
+          <p>
+            See the docs for more detailed xbps usage.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Kernel</h3>
+          <p>
+            Based on the monolithic Linux kernel with configuration tuned for a responsive desktop and workstation experience.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Package tree</h3>
+          <p>
+            Packages are built using the <a href="https://github.com/void-linux/void-packages" target="_blank" rel="noreferrer">void-packages</a> build system so you can reuse existing knowledge and documentation.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="features-title">
+      <h2 id="features" class="section-title">Core features</h2>
+      <div class="grid">
+        <article class="card"><h3>Monochrome focused UI</h3><p>Consistent grayscale branding and dark system theming designed for focus and reduced visual noise.</p></article>
+        <article class="card"><h3>Stable rolling base</h3><p>Follows a rolling release model built on the Void base with an emphasis on predictable and repeatable updates.</p></article>
+        <article class="card"><h3>Fast boot and login</h3><p>Lightweight init, trimmed services and reasonable defaults keep startup and login times short.</p></article>
+        <article class="card"><h3>Minimal images</h3><p>Images ship with a small default set of packages so you can grow the system to match your workflow.</p></article>
+      </div>
+    </section>
+
+    <section aria-labelledby="editions-title">
+      <h2 id="editions" class="section-title">Available editions</h2>
+      <div class="grid editions-grid">
+        <article class="card edition-card">
+          <img src="icons/desktop.svg" width="32" height="32" alt="Desktop icon" class="edition-icon" />
+          <h3>Desktop</h3>
+          <p>
+            Graphical desktop image with a dark theme and console tools preinstalled. Aimed at everyday work and general purpose use.
+          </p>
+          <p class="edition-meta">
+            Includes a preconfigured desktop environment with a monochrome theme. The docs list the current default environment.
+          </p>
+        </article>
+
+        <article class="card edition-card">
+          <img src="icons/minimal.svg" width="32" height="32" alt="Minimal icon" class="edition-icon" />
+          <h3>Minimal</h3>
+          <p>
+            Bare bones system with networking and tooling needed to bootstrap your own environment for containers, labs or tiny VMs.
+          </p>
+        </article>
+
+        <article class="card edition-card">
+          <img src="icons/base.svg" width="32" height="32" alt="Base icon" class="edition-icon" />
+          <h3>Base</h3>
+          <p>
+            Adds common CLI tools and utilities on top of the minimal base. A solid starting point for servers and workstations.
+          </p>
+        </article>
+
+        <article class="card edition-card">
+          <img src="icons/server.svg" width="32" height="32" alt="Server icon" class="edition-icon" />
+          <h3>Server</h3>
+          <p>
+            Headless build with conservative defaults, suitable for home labs and remote machines where you want a small and quiet system.
+          </p>
+        </article>
+
+        <article class="card edition-card">
+          <img src="icons/gaming.svg" width="32" height="32" alt="Gaming icon" class="edition-icon" />
+          <h3>Gaming</h3>
+          <p>
+            Graphics focused image with a tuned Mesa and Vulkan stack. Intended for machines that spend most of their time in games.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="download-title" class="download-section">
+      <h2 id="download" class="section-title">Download and mirrors</h2>
+      <div class="download-layout">
+        <div class="download-main">
+          <h3>Latest images</h3>
+          <div class="release-grid" id="releases">
+            <article class="release-card">
+              <h4>
+                <img src="icons/desktop.svg" width="20" height="20" alt="Desktop icon" class="release-icon" />
+                2025.02 Desktop
+              </h4>
+              <div class="release-meta">x86_64 · 1.6 GB · SHA256 included</div>
+              <div class="release-links">
+                <a href="#">Download ISO</a>
+                <a href="#">RootFS tarball</a>
+                <a href="#">Netboot image</a>
+              </div>
+            </article>
+
+            <article class="release-card">
+              <h4>
+                <img src="icons/server.svg" width="20" height="20" alt="Server icon" class="release-icon" />
+                2025.02 Server
+              </h4>
+              <div class="release-meta">x86_64 · 480 MB · Hardened profile</div>
+              <div class="release-links">
+                <a href="#">Download ISO</a>
+                <a href="#">RootFS tarball</a>
+                <a href="#">Minimal netboot</a>
+              </div>
+            </article>
+
+            <article class="release-card">
+              <h4>
+                <img src="icons/minimal.svg" width="20" height="20" alt="Minimal icon" class="release-icon" />
+                2025.02 Minimal
+              </h4>
+              <div class="release-meta">x86_64 · 140 MB · Bare essentials</div>
+              <div class="release-links">
+                <a href="#">Download ISO</a>
+                <a href="#">RootFS tarball</a>
+              </div>
+            </article>
+
+            <article class="release-card">
+              <h4>
+                <img src="icons/gaming.svg" width="20" height="20" alt="Gaming icon" class="release-icon" />
+                2025.02 Gaming
+              </h4>
+              <div class="release-meta">x86_64 · 2.1 GB · Mesa and Vulkan tuned</div>
+              <div class="release-links">
+                <a href="#">Download ISO</a>
+                <a href="#">Proprietary GPU pack</a>
+              </div>
+            </article>
+          </div>
+        </div>
+        <aside class="download-aside" aria-label="Mirrors and checksums">
+          <h3>Mirrors</h3>
+          <p>
+            A list of download mirrors will be published here. Until then you can use the primary image host or GitHub releases.
+          </p>
+          <h3>Checksums</h3>
+          <p>
+            SHA256 sums are provided next to each image. Verify downloads before writing them to disk.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <section aria-labelledby="docs-title" class="docs-preview">
+      <h2 id="docs" class="section-title">Documentation</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Installation guide</h3>
+          <p>
+            Covers preparing media, partitioning and installing with the Black Void images. Based closely on the Void Linux manual with adjustments where behavior differs.
+          </p>
+          <p><a href="docs/install.html">Open installation docs</a></p>
+        </article>
+        <article class="card">
+          <h3>System and services</h3>
+          <p>
+            Explains runit services, logging and common system maintenance tasks.
+          </p>
+          <p><a href="docs/system.html">Open system docs</a></p>
+        </article>
+        <article class="card">
+          <h3>Using xbps</h3>
+          <p>
+            Package management with xbps including install, remove, query and full upgrade examples.
+          </p>
+          <p><a href="docs/xbps.html">Open xbps docs</a></p>
+        </article>
+      </div>
+    </section>
+
     <section class="credits" aria-label="Credits">
       <div class="credits-inner">
         <h2>Credits</h2>
         <p>
-          Much of the structure and many commands shown here originate from the <a href="https://voidlinux.org" target="_blank" rel="noreferrer">Void Linux</a> documentation.
+          Black Void Linux is a modernized fork of <a href="https://voidlinux.org" target="_blank" rel="noreferrer">Void Linux</a>.
+          The base system, package manager and much of the original documentation come from the Void Linux project and its contributors.
+        </p>
+        <p>
+          This site restyles parts of the Void documentation to match the Black Void branding. Technical differences will be clearly noted in the docs.
         </p>
       </div>
     </section>
 
-    <!-- Footer -->
     <footer>
       <span>Black Void Linux - Monochrome by design.</span>
-      <span class="footer-note">Independent project built on Void Linux.</span>
+      <span class="footer-note">Independent project built on Void Linux. No added telemetry or accounts.</span>
     </footer>
   </main>
 </body>
